@@ -23,6 +23,9 @@ function Home() {
           <Link to='/about'>더 알아보기</Link>
         </button>
       </div>
+      <div className='grid h-96 bg-gray-300 text-center content-center'>
+        CONTENT
+      </div>
     </>
   );
 }
