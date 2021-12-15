@@ -1,4 +1,5 @@
 import React from 'react';
+import Service from '../Service';
 import { Link } from 'react-router-dom';
 import banner from '../../asset/main_banner.jpg';
 
@@ -23,6 +24,7 @@ function Home() {
           <Link to='/about'>더 알아보기</Link>
         </button>
       </div>
+      <Service />
       <div className='grid h-96 bg-gray-300 text-center content-center'>
         CONTENT
       </div>
