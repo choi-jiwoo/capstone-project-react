@@ -91,12 +91,16 @@ function Gpx() {
       map.setCenter(moveLatLon);
 
       // 지도 포커스 설정
-      const points = [linePath[0], linePath[courseLength - 1]];
+      const points = [startPosition, arrivePosition];
       const bounds = new kakao.maps.LatLngBounds();
       points.forEach((element) => {
         bounds.extend(element);
       });
       map.setBounds(bounds);
+
+      // 지도 1단계 줌아웃
+      const level = map.getLevel();
+      map.setLevel(level + 1);
     });
   };
 
