@@ -38,6 +38,51 @@ function Gpx() {
 
       polyline.setMap(map);
 
+      // 출발 마커 표시
+      const startPosition = linePath[0];
+      var startSrc =
+          'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다
+        startSize = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
+        startOption = {
+          offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+        };
+
+      // 출발 마커 이미지를 생성합니다
+      var startImage = new kakao.maps.MarkerImage(
+        startSrc,
+        startSize,
+        startOption
+      );
+
+      // 출발 마커를 생성합니다
+      var startMarker = new kakao.maps.Marker({
+        map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+        position: startPosition,
+        image: startImage, // 출발 마커이미지를 설정합니다
+      });
+
+      // 도착 마커 표시
+      const arrivePosition = linePath[courseLength - 1];
+      var arriveSrc =
+          'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png', // 도착 마커이미지 주소입니다
+        arriveSize = new kakao.maps.Size(50, 45), // 도착 마커이미지의 크기입니다
+        arriveOption = {
+          offset: new kakao.maps.Point(15, 43), // 도착 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+        };
+
+      var arriveImage = new kakao.maps.MarkerImage(
+        arriveSrc,
+        arriveSize,
+        arriveOption
+      );
+
+      // 도착 마커를 생성합니다
+      var arriveMarker = new kakao.maps.Marker({
+        map: map, // 도착 마커가 지도 위에 표시되도록 설정합니다
+        position: arrivePosition,
+        image: arriveImage, // 도착 마커이미지를 설정합니다
+      });
+
       // 지도 위치 변경
       const moveLatLon = new kakao.maps.LatLng(
         linePath[middle].Ma,
