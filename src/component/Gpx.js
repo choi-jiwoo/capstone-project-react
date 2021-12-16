@@ -63,6 +63,8 @@ function Gpx() {
         level: 9,
       };
     const map = new kakao.maps.Map(mapContainer, mapOption);
+    var zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     printRoute(map);
   }, []);
   return <div id='map' style={{ width: '700px', height: '500px' }}></div>;
