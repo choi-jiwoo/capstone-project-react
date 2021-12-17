@@ -8,6 +8,7 @@ import Search from './component/page/Search';
 import Stay from './component/page/Stay';
 import Activity from './component/page/Activity';
 import Plogging from './component/page/Plogging';
+import Gpx from './component/page/Gpx';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/stay' exact component={Stay} />
           <Route path='/activity' exact component={Activity} />
           <Route path='/plogging' exact component={Plogging} />
+          <Route path='/plogging/courseView' exact component={Gpx} />
         </Switch>
         <Footer />
       </div>
