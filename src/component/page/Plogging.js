@@ -1,10 +1,8 @@
 import React from 'react';
-import Gpx from './Gpx';
 import { Link } from 'react-router-dom';
 import courseList from '../../asset/courseList.json';
 
 function Plogging() {
-  console.log(courseList);
   const CourseBtn = ({ courseName }) => (
     <button type='button' className='mx-2 my-3'>
       <Link
