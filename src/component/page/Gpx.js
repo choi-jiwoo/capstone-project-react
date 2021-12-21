@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import XMLParser from 'react-xml-parser';
 import { useLocation } from 'react-router-dom';
+import { saveAs } from 'file-saver';
+import { Link } from 'react-router-dom';
 
 function Gpx() {
   const location = useLocation();
   const courseName = location.state.courseName;
   const { kakao } = window;
-  const [downloadLink, setDownloadLink] = useState('');
+  const [info, setInfo] = useState('');
+
   const baseUrl =
     'http://api.visitkorea.or.kr/openapi/service/rest/Durunubi/courseList?';
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -51,14 +54,13 @@ function Gpx() {
     points.forEach((element) => {
       bounds.extend(element);
     });
-    map.setBounds(bounds);
+    map.setBounds(bounds, 100, 100);
 
     // 지도 위치 변경
     const moveLatLon = new kakao.maps.LatLng(
       linePath[middle].Ma,
       linePath[middle].La
     );
-    // map.setCenter(moveLatLon);
     map.panTo(moveLatLon);
 
     // 지도 1단계 줌아웃
@@ -66,22 +68,8 @@ function Gpx() {
     // map.setLevel(level + 1);
   };
 
-  const getDownloadLink = () => {
-    // 파일명이 다른 기준으로 되어있음..
-    searchCourse().then((info) => {
-      setDownloadLink(
-        'https://www.durunubi.kr/download?filePath=/data/koreamobility/course/summap/' +
-          info.crsIdx +
-          '.gpx&downloadName=' +
-          courseName +
-          '.gpx&device=WEB&course_id=' +
-          info.crsIdx
-      );
-    });
-  };
-
   // 분명 개선의 여지가 있을것
-  const searchCourse = (map) => {
+  const requestDurunubi = (map) => {
     const params = {
       serviceKey: apiKey,
       pageNo: 1,
@@ -92,13 +80,29 @@ function Gpx() {
       brdDiv: 'DNWW',
     };
 
-    axios
+    return axios
       .get(baseUrl, {
         params: params,
       })
-      .then((response) => response.data.response.body.items.item)
+      .then((response) => response.data.response.body.items.item);
+  };
+
+  const getInfo = () => {
+    requestDurunubi().then((info) => setInfo(info));
+  };
+
+  const getGpx = () => {
+    return requestDurunubi()
       .then((info) => axios.get(info.gpxpath).then((response) => response.data))
-      .then((gpx) => new XMLParser().parseFromString(gpx))
+      .then((gpx) => new XMLParser().parseFromString(gpx));
+  };
+
+  const downloadGpx = () => {
+    saveAs(info.gpxpath, 'gpxpath.gpx');
+  };
+
+  const searchCourse = (map) => {
+    getGpx()
       .then((xml) => xml.getElementsByTagName('trkseg')[0])
       .then((trkseg) => {
         const trksegData = trkseg.children;
@@ -142,22 +146,56 @@ function Gpx() {
     const map = new kakao.maps.Map(mapContainer, mapOption);
     const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-    searchCourse(map);
+    getInfo();
+    // searchCourse(map);
   }, []);
 
   return (
-    <>
-      <div>
-        <a
-          href={downloadLink}
-          className='btn btn-outline-success p-2'
-          role='button'
-        >
-          GPX 트랙 다운로드
-        </a>
+    <div className='container-xl '>
+      <div className='Btn text-xl text-gray-400 hover:text-gray-700 pt-10'>
+        <Link to='/plogging'>&lt; 뒤로가기</Link>
       </div>
-      <div id='map' style={{ width: '700px', height: '500px' }}></div>
-    </>
+      <div className='flex flex-row'>
+        <div>
+          <div
+            className='mt-10'
+            id='map'
+            style={{ width: '600px', height: '600px' }}
+          ></div>
+        </div>
+        <div className='flex flex-col m-10'>
+          <div className='text-3xl font-bold pb-10'>{info.crsKorNm}</div>
+          <div className='courseDesc text-lg flex flex-col space-y-4 pb-10'>
+            <div>
+              <p>코스 형태</p>
+              {info.crsCycle}
+            </div>
+            <div>
+              <p>관광 포인트</p>
+              {info.crsTourInfo}
+            </div>
+            <div>
+              <p>코스 개요</p>
+              {info.crsSummary}
+            </div>
+            <div>
+              <p>코스 설명</p>
+              {info.crsContents}
+            </div>
+            <div>
+              <p>여행자 정보</p>
+              {info.travelerinfo}
+            </div>
+          </div>
+          <button
+            className='btn btn-outline-success p-2 text-sm justify-self-start'
+            onClick={downloadGpx}
+          >
+            GPX 트랙 다운로드
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
