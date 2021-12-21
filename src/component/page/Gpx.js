@@ -139,8 +139,8 @@ function Gpx() {
         center: baseMap,
         level: 9,
       };
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-    var zoomControl = new kakao.maps.ZoomControl();
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+    const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     searchCourse(map);
   }, []);
