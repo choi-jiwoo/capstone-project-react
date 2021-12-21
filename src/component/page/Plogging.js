@@ -25,7 +25,7 @@ function Plogging() {
     ));
   };
 
-  return <div className='m-3'>{renderBtn()}</div>;
+  return <div className='container-xl'>{renderBtn()}</div>;
 }
 
 export default Plogging;
