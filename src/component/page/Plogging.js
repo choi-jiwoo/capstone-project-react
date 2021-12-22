@@ -12,7 +12,7 @@ function Plogging() {
             courseName: courseName,
           },
         }}
-        className='border-2 rounded-lg border-black hover:border-blue-600 p-2 '
+        className='border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
       >
         {courseName}
       </Link>
@@ -25,7 +25,17 @@ function Plogging() {
     ));
   };
 
-  return <div className='container-xl'>{renderBtn()}</div>;
+  return (
+    <>
+      <div className='bg-gray-200 w-full'>
+        <div className='text-7xl font-bold pl-24 h-96 pt-36'>PLOGGING</div>
+      </div>
+      <div className='container-xl'>
+        <div className='text-4xl font-bold pt-20 pb-8'>코스 리스트</div>
+        <div className='flex pt-2 flex-wrap'>{renderBtn()}</div>
+      </div>
+    </>
+  );
 }
 
 export default Plogging;
