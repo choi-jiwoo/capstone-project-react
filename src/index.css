@@ -23,3 +23,8 @@
   height: 4rem;
   width: 4rem;
 }
+
+.courseDesc p {
+  font-weight: bold;
+}
+
