@@ -1,12 +1,13 @@
 import React from 'react';
 import ploggingImg from '../../asset/plogging.jpg';
+import about from '../../asset/about.jpg';
 
 function About() {
   return (
     <div className='container-xl'>
       <div className='part1 text-center'>
         <div>
-          <div className='text-3xl py-4 font-bold mt-20'>공정여행이란</div>
+          <div className='text-4xl py-4 font-bold mt-20'>공정여행이란</div>
           <div>
             <p className='text-2xl'>
               <span className='text-green-500'>공정여행</span>은
@@ -50,13 +51,18 @@ function About() {
               </p>
             </div>
           </div>
+          <img
+            className='block ml-auto mr-auto w-2/6'
+            src={about}
+            alt='about'
+          />
         </div>
       </div>
-      <div className='part2 pt-10'>
-        <div className='text-3xl text-center py-4 font-bold'>플로깅이란</div>
+      <div className='part2 mt-20'>
+        <div className='text-4xl text-center py-4 font-bold'>플로깅이란</div>
         <div className='grid grid-cols-2 mb-20'>
           <img className='ml-12 rounded-xl' src={ploggingImg} alt='plogging' />
-          <div className='text-xl px-12 p-14 text-justify'>
+          <div className='text-xl py-14 pr-20 text-justify'>
             <div className='mb-10'>
               플로깅(plogging)은 ‘이삭을 줍는다’는 뜻의 스웨덴어 ‘Plocka upp’과
               ‘달리는 운동’을 뜻하는 영어 ‘Jogging’의 합성어로
