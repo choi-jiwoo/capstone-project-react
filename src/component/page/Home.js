@@ -16,7 +16,7 @@ function Home() {
         <p className='text-2xl font-bold'>세상을 바꾸는 여행</p>
         <p className='text-4xl font-bold mb-2'>지금 내가 시작합니다</p>
         <p className='text-xl pb-4'>
-          여행자에게는 배려와 감동을, 여행지역에는 환경보전과 경제에 기여하는
+          여행자에게는 배려와 감동을, 여행지역에는 환경 보전과 경제에 기여하는
           여행!
         </p>
 
