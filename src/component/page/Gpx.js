@@ -147,7 +147,7 @@ function Gpx() {
     const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     getInfo();
-    // searchCourse(map);
+    searchCourse(map);
   }, []);
 
   return (
