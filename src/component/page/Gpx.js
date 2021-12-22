@@ -152,7 +152,7 @@ function Gpx() {
 
   return (
     <div className='container-xl '>
-      <div className='Btn text-xl text-gray-400 hover:text-gray-700 pt-10'>
+      <div className='Btn text-xl text-gray-400 pt-10'>
         <Link to='/plogging'>&lt; 뒤로가기</Link>
       </div>
       <div className='flex flex-row'>
