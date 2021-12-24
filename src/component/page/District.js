@@ -28,10 +28,12 @@ function District() {
   return (
     <div className='container-xl'>
       <div className='ml-4 Btn text-xl text-gray-400 pt-10'>
-        <Link to='/stay'>&lt; 뒤로가기</Link>
+        <Link to='/stay'>
+          <span className='hover:text-green-500'>&lt; 뒤로가기</span>
+        </Link>
       </div>
       <div className='m-4 pt-4 text-4xl font-bold'>
-        <span className='text-green-400'>{district}</span>에 대한 검색결과
+        <span className='text-green-500'>{district}</span>에 대한 검색결과
       </div>
       <StayList data={data} />
       <Page page={page} count={count} setPage={setPage} />
