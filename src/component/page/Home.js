@@ -1,5 +1,6 @@
 import React from 'react';
 import Service from '../Service';
+import HomeContent from '../HomeContent';
 import { Link } from 'react-router-dom';
 import banner from '../../asset/main_banner.jpg';
 
@@ -20,14 +21,14 @@ function Home() {
           여행!
         </p>
 
-        <button className='bg-white font-bold rounded-full py-3 px-6'>
-          <Link to='/about'>더 알아보기</Link>
+        <button className='bg-white font-bold rounded-full py-3 px-6 hover:text-green-500'>
+          <Link to='/about'>
+            <span className='hover:text-green-500'>더 알아보기</span>
+          </Link>
         </button>
       </div>
       <Service />
-      <div className='grid h-96 bg-gray-300 text-center content-center'>
-        CONTENT
-      </div>
+      <HomeContent />
     </>
   );
 }
