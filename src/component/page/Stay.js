@@ -22,7 +22,7 @@ function Stay() {
 
   const DistrictCard = ({ district }) => (
     <Link
-      className='border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
+      className='border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3 hover:text-green-500'
       to={{
         pathname: '/stay/district',
         state: {
@@ -46,10 +46,18 @@ function Stay() {
         <div className='text-7xl font-bold pl-24 h-96 pt-36'>STAY</div>
       </div>
       <div className='container-xl'>
-        <div className='text-4xl font-bold pt-20'>제주시</div>
-        <div className='flex pt-2'>{renderBtn(jejusi)}</div>
-        <div className='text-4xl font-bold pt-20'>서귀포시</div>
-        <div className='flex pt-2'>{renderBtn(seogwiposi)}</div>
+        <div className='text-4xl font-bold pt-20 w-full text-center'>
+          제주시
+        </div>
+        <div className='flex pt-2 space-x-4 justify-center'>
+          {renderBtn(jejusi)}
+        </div>
+        <div className='text-4xl font-bold pt-20 w-full text-center'>
+          서귀포시
+        </div>
+        <div className='flex pt-2 space-x-4 justify-center pb-20'>
+          {renderBtn(seogwiposi)}
+        </div>
       </div>
     </>
   );
