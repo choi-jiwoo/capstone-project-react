@@ -60,12 +60,17 @@ function About() {
       </div>
       <div className='part2 mt-20'>
         <div className='text-4xl text-center py-4 font-bold'>플로깅이란</div>
-        <div className='grid grid-cols-2 mb-20'>
-          <img className='ml-12 rounded-xl' src={ploggingImg} alt='plogging' />
-          <div className='text-xl py-14 pr-20 text-justify'>
+        <div className='flex flex-row place-items-center mb-20'>
+          <img
+            className='rounded-xl flex-initial m-10 2-5/12'
+            src={ploggingImg}
+            alt='plogging'
+          />
+          <div className='text-xl text-justify break-words px-20 py-10'>
             <div className='mb-10'>
-              플로깅(plogging)은 ‘이삭을 줍는다’는 뜻의 스웨덴어 ‘Plocka upp’과
-              ‘달리는 운동’을 뜻하는 영어 ‘Jogging’의 합성어로
+              <span className='text-green-500 font-bold'>플로깅(plogging)</span>
+              은 ‘이삭을 줍는다’는 뜻의 스웨덴어 ‘Plocka upp’과 ‘달리는 운동’을
+              뜻하는 영어 ‘Jogging’의 합성어로
             </div>
             <div>❝달리기를 하면서 쓰레기를 줍는 환경 보호 활동❞이다. </div>
           </div>
