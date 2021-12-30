@@ -12,7 +12,7 @@ function Plogging() {
             courseName: courseName,
           },
         }}
-        className='border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
+        className=' border-transparent shadow-sm rounded-lg py-2 px-3 hover:text-green-500'
       >
         {courseName}
       </Link>
@@ -31,8 +31,12 @@ function Plogging() {
         <div className='text-7xl font-bold pl-24 h-96 pt-36'>PLOGGING</div>
       </div>
       <div className='container-xl'>
-        <div className='text-4xl font-bold pt-20 pb-8'>코스 리스트</div>
-        <div className='flex pt-2 flex-wrap'>{renderBtn()}</div>
+        <div className='text-4xl font-bold pt-20 pb-8 w-full text-center'>
+          코스 리스트
+        </div>
+        <div className='flex pt-2 flex-wrap justify-center pb-20'>
+          {renderBtn()}
+        </div>
       </div>
     </>
   );
