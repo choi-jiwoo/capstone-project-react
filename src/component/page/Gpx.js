@@ -31,24 +31,21 @@ function Gpx() {
 
   const drawFlag = (linePath, map, imgSrc) => {
     const position = linePath;
-    const size = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
+    const size = new kakao.maps.Size(50, 45),
       option = {
-        offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+        offset: new kakao.maps.Point(15, 43),
       };
 
-    // 출발 마커 이미지를 생성합니다
     const image = new kakao.maps.MarkerImage(imgSrc, size, option);
 
-    // 출발 마커를 생성합니다
     const marker = new kakao.maps.Marker({
-      map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+      map: map,
       position: position,
-      image: image, // 출발 마커이미지를 설정합니다
+      image: image,
     });
   };
 
   const moveFocus = (linePath, map, middle, startPosition, arrivePosition) => {
-    // 지도 포커스 설정
     const points = [startPosition, arrivePosition];
     const bounds = new kakao.maps.LatLngBounds();
     points.forEach((element) => {
@@ -56,7 +53,6 @@ function Gpx() {
     });
     map.setBounds(bounds, 100, 100);
 
-    // 지도 위치 변경
     const moveLatLon = new kakao.maps.LatLng(
       linePath[middle].Ma,
       linePath[middle].La
