@@ -57,7 +57,7 @@ function Gpx() {
       linePath[middle].Ma,
       linePath[middle].La
     );
-    map.panTo(moveLatLon);
+    map.setCenter(moveLatLon);
 
     // 지도 1단계 줌아웃
     // const level = map.getLevel();
