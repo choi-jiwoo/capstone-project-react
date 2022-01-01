@@ -84,7 +84,18 @@ function Gpx() {
   };
 
   const getInfo = () => {
-    requestDurunubi().then((info) => setInfo(info));
+    requestDurunubi().then((info) => {
+      const data = {
+        name: info.crsKorNm.split('<br>'),
+        type: info.crsCycle.split('<br>'),
+        tour: info.crsTourInfo.split('<br>'),
+        summary: info.crsSummary.split('<br>'),
+        contents: info.crsContents.split('<br>'),
+        travelInfo: info.travelerinfo.split('<br>'),
+      };
+
+      setInfo(data);
+    });
   };
 
   const getGpx = () => {
@@ -132,6 +143,9 @@ function Gpx() {
       });
   };
 
+  const text = (data) =>
+    data ? data.map((element) => <p key={element}>{element}</p>) : null;
+
   useEffect(() => {
     // setting map
     const mapContainer = document.getElementById('map'),
@@ -160,27 +174,27 @@ function Gpx() {
           ></div>
         </div>
         <div className='flex flex-col m-10'>
-          <div className='text-3xl font-bold pb-10'>{info.crsKorNm}</div>
+          <div className='text-3xl font-bold pb-10'>{info.name}</div>
           <div className='courseDesc text-lg flex flex-col space-y-4 pb-10'>
             <div>
-              <p>코스 형태</p>
-              {info.crsCycle}
+              <p className='hdr'>코스 형태</p>
+              {info.type}
             </div>
             <div>
-              <p>관광 포인트</p>
-              {info.crsTourInfo}
+              <p className='hdr'>관광 포인트</p>
+              {text(info.tour)}
             </div>
             <div>
-              <p>코스 개요</p>
-              {info.crsSummary}
+              <p className='hdr'>코스 개요</p>
+              {text(info.summary)}
             </div>
             <div>
-              <p>코스 설명</p>
-              {info.crsContents}
+              <p className='hdr'>코스 설명</p>
+              {text(info.contents)}
             </div>
             <div>
-              <p>여행자 정보</p>
-              {info.travelerinfo}
+              <p className='hdr'>여행자 정보</p>
+              {text(info.travelInfo)}
             </div>
           </div>
           <button
