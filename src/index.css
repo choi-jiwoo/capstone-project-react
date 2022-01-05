@@ -101,4 +101,6 @@ ul.pagination li a.active {
   height: 30px;
   color: #22c55e;
 }
+.form {
+  width: 648px;
 }
