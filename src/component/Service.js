@@ -36,13 +36,6 @@ function Service() {
         </Link>
         <Link
           className='grid border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
-          to='/activity'
-        >
-          <p className='serviceMenuButton'>🏄🏻‍♂️</p>
-          <p className='text-center'>체험활동</p>
-        </Link>
-        <Link
-          className='grid border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
           to='/plogging'
         >
           <p className='serviceMenuButton'>🏃🏻‍♀️</p>
