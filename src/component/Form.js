@@ -1,40 +1,58 @@
 import React, { useState } from 'react';
-import Select from 'react-select';
 
-function Form({ getRequest }) {
-  const [selected, setSelected] = useState(0);
-  const selectList = [1, 2, 3]; // 추후에 실제 데이터로 바꿔야 할 부분
-  const options = selectList.map((item) => ({
-    ...item,
-    label: item,
-    value: item,
-  }));
+function Form({ getRequest, selectList }) {
+  const [checkedItems, setCheckedItems] = useState(new Set());
 
-  const handleSelect = (item) => {
-    setSelected(item.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('cat', selected);
-    const params = new URLSearchParams(formData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    checkedItems.forEach((item) => {
+      params.append('tag', item);
+    });
+    console.log(params.toString());
     getRequest(params);
   };
 
+  const selectCheckbox = (e) => {
+    const item = e.target.value;
+    const labelTag = e.target.parentNode;
+
+    if (checkedItems.has(item)) {
+      checkedItems.delete(item);
+      setCheckedItems(checkedItems);
+      labelTag.style.backgroundColor = '#fff';
+    } else {
+      checkedItems.add(item);
+      setCheckedItems(checkedItems);
+      labelTag.style.backgroundColor = '#ccffcc';
+    }
+  };
+
   return (
-    <div>
-      <form className='flex' onSubmit={handleSubmit}>
-        <Select
-          className='border rounded p-1'
-          onChange={handleSelect}
-          options={options}
-        />
-        <button type='submit' className='bg-gray-300 rounded px-2'>
-          Search
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className='flex flex-col'>
+      <div className='flex flex-wrap gap-2 justify-center'>
+        {selectList.map((item) => (
+          <label
+            key={item}
+            className='flex place-items-center border rounded-full py-1 px-3 cursor-pointer'
+          >
+            <input
+              type='checkbox'
+              className='hidden'
+              value={item}
+              onChange={(e) => selectCheckbox(e)}
+            />
+            <div className='select-none text-sm'>{item}</div>
+          </label>
+        ))}
+      </div>
+      <button
+        type='submit'
+        className='place-self-end border select-none text-sm py-2 px-3 rounded-lg mt-3 mr-3 w-20 text-white bg-green-500 hover:bg-green-600'
+      >
+        Search
+      </button>
+    </form>
   );
 }
 
