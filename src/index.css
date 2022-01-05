@@ -49,7 +49,7 @@
   width: 4rem;
 }
 
-.courseDesc p {
+.courseDesc .hdr {
   font-weight: bold;
 }
 
