@@ -1,10 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import cafe from '../asset/cafe.png';
-import restaurant from '../asset/restaurant.png';
-import stay from '../asset/stay.png';
-import activity from '../asset/activity.png';
-import plogging from '../asset/plogging.png';
 
 function Service() {
   return (
