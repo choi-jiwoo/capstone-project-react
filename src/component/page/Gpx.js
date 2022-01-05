@@ -10,7 +10,7 @@ function Gpx() {
   const location = useLocation();
   const courseName = location.state.courseName;
   const { kakao } = window;
-  const [info, setInfo] = useState('');
+  const [info, setInfo] = useState({});
 
   const baseUrl =
     'http://api.visitkorea.or.kr/openapi/service/rest/Durunubi/courseList?';
