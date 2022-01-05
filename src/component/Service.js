@@ -10,14 +10,24 @@ function Service() {
       <div className='flex flex-wrap flex-row justify-center items-center gap-6 pt-3 pb-7'>
         <Link
           className='grid border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
-          to='/cafe'
+          to={{
+            pathname: '/cafe',
+            state: {
+              type: 'cafe',
+            },
+          }}
         >
           <p className='serviceMenuButton'>☕️</p>
           <p className='text-center'>카페</p>
         </Link>
         <Link
           className='grid border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
-          to='/restaurant'
+          to={{
+            pathname: '/restaurant',
+            state: {
+              type: 'res',
+            },
+          }}
         >
           <p className='serviceMenuButton'>🥘</p>
           <p className='text-center'>음식점</p>
