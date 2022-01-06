@@ -1,6 +1,5 @@
 /*global kakao*/
 import React, { useEffect } from 'react';
-import StoreList from './StoreList';
 
 const Location = ({ list }) => {
   const { kakao } = window;
@@ -132,20 +131,15 @@ const Location = ({ list }) => {
   };
 
   return (
-    <>
-      <div className='absolute bottom-0 left-0'>
-        <StoreList list={list} />
-      </div>
-      <div className='map_wrap'>
-        <div
-          id='map'
-          style={{
-            width: '100%',
-            height: '100%',
-          }}
-        ></div>
-      </div>
-    </>
+    <div className='map_wrap'>
+      <div
+        id='map'
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
+      ></div>
+    </div>
   );
 };
 export default Location;
