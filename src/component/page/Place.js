@@ -120,6 +120,9 @@ function Place() {
             checkedItems={checkedItems}
             setCheckedItems={setCheckedItems}
           />
+          <div className='mb-2'>
+            <hr />
+          </div>
           <Loading loading={loading} />
           <StoreList
             data={data}
