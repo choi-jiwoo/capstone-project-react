@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Form({ getRequest, selectList }) {
-  const [checkedItems, setCheckedItems] = useState(new Set());
-
+function Form({ getParameters, selectList, checkedItems, setCheckedItems }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const params = new URLSearchParams();
-    checkedItems.forEach((item) => {
-      params.append('tag', item);
-    });
-    console.log(params.toString());
-    getRequest(params);
+    const firstPage = 1;
+    getParameters(checkedItems, firstPage);
   };
 
   const selectCheckbox = (e) => {

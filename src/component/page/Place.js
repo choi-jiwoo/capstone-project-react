@@ -10,6 +10,8 @@ function Place() {
   const location = useLocation();
   const type = location.state.type;
   const [data, setData] = useState([]);
+  const [checkedItems, setCheckedItems] = useState(new Set());
+  const [params, setParams] = useState(new URLSearchParams());
   const baseUrl = 'http://127.0.0.1:8000/api/';
   const [loading, setLoading] = useState(false);
 
@@ -92,14 +94,16 @@ function Place() {
     else return restaurantKwrd;
   };
 
-  const getRequest = (params) => {
+  const getParameters = (checkedItems, firstPage) => {
+    data.length = 0;
     setLoading(true);
-    let url;
-    if (params.has('tag')) url = baseUrl + type + '?' + params;
-    else url = baseUrl + type + params;
-    axios.get(url).then(function (response) {
-      setData(response.data);
+    setHasMore(true);
+    checkedItems.forEach((item) => {
+      params.append('tag', item);
     });
+    getRequest(params, firstPage);
+    setPage(2);
+  };
   };
 
   useEffect(() => {
@@ -110,7 +114,12 @@ function Place() {
     <div className='search container-xl mt-8'>
       <div className='flex h-full relative'>
         <div className='form flex flex-col pr-5'>
-          <Form getRequest={getRequest} selectList={setType(type)} />
+          <Form
+            getParameters={getParameters}
+            selectList={setType(type)}
+            checkedItems={checkedItems}
+            setCheckedItems={setCheckedItems}
+          />
           <Loading loading={loading} />
           <StoreList
             data={data}
