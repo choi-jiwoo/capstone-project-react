@@ -4,6 +4,7 @@ import axios from 'axios';
 import Location from '../Location';
 import Form from '../Form';
 import Loading from '../Loading';
+import StoreList from '../StoreList';
 
 function Place() {
   const location = useLocation();
@@ -111,6 +112,9 @@ function Place() {
         <div className='form flex flex-col pr-5'>
           <Form getRequest={getRequest} selectList={setType(type)} />
           <Loading loading={loading} />
+          <StoreList
+            data={data}
+          />
         </div>
         <Location list={data} />
       </div>
