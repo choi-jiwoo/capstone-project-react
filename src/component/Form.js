@@ -24,12 +24,12 @@ function Form({ getRequest, selectList }) {
     } else {
       checkedItems.add(item);
       setCheckedItems(checkedItems);
-      labelTag.style.backgroundColor = '#ccffcc';
+      labelTag.style.backgroundColor = '#bbf7d0';
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col'>
+    <form onSubmit={handleSubmit} className='flex flex-col mt-3'>
       <div className='flex flex-wrap gap-2 justify-center'>
         {selectList.map((item) => (
           <label
@@ -48,7 +48,7 @@ function Form({ getRequest, selectList }) {
       </div>
       <button
         type='submit'
-        className='place-self-end border select-none text-sm py-2 px-3 rounded-lg mt-3 mr-3 w-20 text-white bg-green-500 hover:bg-green-600'
+        className='place-self-end border select-none text-sm py-2 px-3 mr-3 my-3 rounded-lg w-20 text-white bg-green-500 hover:bg-green-600'
       >
         Search
       </button>
