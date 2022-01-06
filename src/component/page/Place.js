@@ -14,6 +14,8 @@ function Place() {
   const [params, setParams] = useState(new URLSearchParams());
   const baseUrl = 'http://127.0.0.1:8000/api/';
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   // 나중에 이부분은 db에서 불러오기
   const cafeKwrd = [
@@ -104,6 +106,27 @@ function Place() {
     getRequest(params, firstPage);
     setPage(2);
   };
+
+  const getRequest = (params, page) => {
+    if (params.has('page')) {
+      params.delete('page');
+    }
+    params.append('page', page);
+    setParams(params);
+    console.log(params.toString());
+
+    const url = baseUrl + type + '?' + params;
+    axios
+      .get(url)
+      .then(function (response) {
+        const res = response.data;
+        const list = res.results;
+        if (res.next === null || list.length < 10) setHasMore(false);
+        setData([...data, ...list]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -126,6 +149,11 @@ function Place() {
           <Loading loading={loading} />
           <StoreList
             data={data}
+            page={page}
+            setPage={setPage}
+            hasMore={hasMore}
+            params={params}
+            getRequest={getRequest}
           />
         </div>
         <Location list={data} />
