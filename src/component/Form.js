@@ -27,16 +27,16 @@ function Form({ getParameters, selectList, checkedItems, setCheckedItems }) {
       <div className='flex flex-wrap gap-2 justify-center'>
         {selectList.map((item) => (
           <label
-            key={item}
+            key={item.id}
             className='flex place-items-center border rounded-full py-1 px-3 cursor-pointer'
           >
             <input
               type='checkbox'
               className='hidden'
-              value={item}
+              value={item.keyword}
               onChange={(e) => selectCheckbox(e)}
             />
-            <div className='select-none text-sm'>{item}</div>
+            <div className='select-none text-sm'>{item.keyword}</div>
           </label>
         ))}
       </div>
