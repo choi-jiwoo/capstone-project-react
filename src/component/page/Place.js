@@ -20,6 +20,8 @@ function Place() {
 
   const getParameters = (checkedItems, firstPage) => {
     data.length = 0;
+    params.delete('page');
+    params.delete('tag');
     setLoading(true);
     setHasMore(true);
     checkedItems.forEach((item) => {
@@ -27,15 +29,12 @@ function Place() {
     });
     getRequest(params, firstPage);
     setPage(2);
+    console.log(params.toString()); 
   };
 
   const getRequest = (params, page) => {
-    if (params.has('page')) {
-      params.delete('page');
-    }
     params.append('page', page);
     setParams(params);
-    console.log(params.toString());
 
     const url = baseUrl + type + '?' + params;
     axios
