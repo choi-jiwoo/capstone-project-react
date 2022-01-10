@@ -11,6 +11,7 @@ function Gpx() {
   const courseName = location.state.courseName;
   const { kakao } = window;
   const [info, setInfo] = useState({});
+  const [gpx, setGpx] = useState();
 
   const baseUrl =
     'http://api.visitkorea.or.kr/openapi/service/rest/Durunubi/courseList?';
@@ -93,7 +94,7 @@ function Gpx() {
         contents: info.crsContents.split('<br>'),
         travelInfo: info.travelerinfo.split('<br>'),
       };
-
+      setGpx(info);
       setInfo(data);
     });
   };
@@ -105,7 +106,7 @@ function Gpx() {
   };
 
   const downloadGpx = () => {
-    saveAs(info.gpxpath, 'gpxpath.gpx');
+    saveAs(gpx.gpxpath, `${courseName}.gpx`);
   };
 
   const searchCourse = (map) => {
