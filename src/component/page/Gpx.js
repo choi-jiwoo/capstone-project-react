@@ -65,8 +65,7 @@ function Gpx() {
     // map.setLevel(level + 1);
   };
 
-  // 분명 개선의 여지가 있을것
-  const requestDurunubi = (map) => {
+  const requestDurunubi = () => {
     const params = {
       serviceKey: apiKey,
       pageNo: 1,
