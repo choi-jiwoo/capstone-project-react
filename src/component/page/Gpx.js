@@ -84,18 +84,23 @@ function Gpx() {
   };
 
   const getInfo = () => {
-    requestDurunubi().then((info) => {
-      const data = {
-        name: info.crsKorNm.split('<br>'),
-        type: info.crsCycle.split('<br>'),
-        tour: info.crsTourInfo.split('<br>'),
-        summary: info.crsSummary.split('<br>'),
-        contents: info.crsContents.split('<br>'),
-        travelInfo: info.travelerinfo.split('<br>'),
-      };
-      setGpx(info);
-      setInfo(data);
-    });
+    requestDurunubi()
+      .then((info) => {
+        const data = {
+          name: info.crsKorNm.split('<br>'),
+          type: info.crsCycle.split('<br>'),
+          tour: info.crsTourInfo.split('<br>'),
+          summary: info.crsSummary.split('<br>'),
+          contents: info.crsContents.split('<br>'),
+          travelInfo: info.travelerinfo.split('<br>'),
+        };
+        setGpx(info);
+        setInfo(data);
+      })
+      .catch(() => {
+        alert('Service not available as of now.');
+        window.location.href = 'http://localhost:3000/plogging';
+      });
   };
 
   const getGpx = () => {
