@@ -10,8 +10,8 @@ function Gpx() {
   const location = useLocation();
   const courseName = location.state.courseName;
   const { kakao } = window;
-  const [info, setInfo] = useState({});
   const [gpx, setGpx] = useState();
+  const [courseInfo, setCourseInfo] = useState({});
 
   const baseUrl =
     'http://api.visitkorea.or.kr/openapi/service/rest/Durunubi/courseList?';
@@ -95,7 +95,7 @@ function Gpx() {
           travelInfo: info.travelerinfo.split('<br>'),
         };
         setGpx(info);
-        setInfo(data);
+        setCourseInfo(data);
       })
       .catch(() => {
         alert('Service not available as of now.');
@@ -181,27 +181,27 @@ function Gpx() {
           ></div>
         </div>
         <div className='flex flex-col m-10'>
-          <div className='text-3xl font-bold pb-10'>{info.name}</div>
+          <div className='text-3xl font-bold pb-10'>{courseInfo.name}</div>
           <div className='courseDesc text-lg flex flex-col space-y-4 pb-10'>
             <div>
               <p className='hdr'>코스 형태</p>
-              {info.type}
+              {courseInfo.type}
             </div>
             <div>
               <p className='hdr'>관광 포인트</p>
-              {text(info.tour)}
+              {text(courseInfo.tour)}
             </div>
             <div>
               <p className='hdr'>코스 개요</p>
-              {text(info.summary)}
+              {text(courseInfo.summary)}
             </div>
             <div>
               <p className='hdr'>코스 설명</p>
-              {text(info.contents)}
+              {text(courseInfo.contents)}
             </div>
             <div>
               <p className='hdr'>여행자 정보</p>
-              {text(info.travelInfo)}
+              {text(courseInfo.travelInfo)}
             </div>
           </div>
           <button
