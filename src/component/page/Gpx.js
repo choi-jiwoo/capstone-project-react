@@ -87,7 +87,7 @@ function Gpx() {
   };
 
   const getInfo = () => {
-    requestDurunubi()
+    return requestDurunubi()
       .then((info) => {
         const data = {
           name: info.crsKorNm.split('<br>'),
@@ -99,6 +99,7 @@ function Gpx() {
         };
         setInfo(info);
         setCourseInfo(data);
+        return info;
       })
       .catch(() => {
         alert('Service not available as of now.');
@@ -106,18 +107,14 @@ function Gpx() {
       });
   };
 
-  const getGpx = () => {
-    return requestDurunubi()
-      .then((info) => axios.get(info.gpxpath).then((response) => response.data))
-      .then((gpx) => new XMLParser().parseFromString(gpx));
-  };
-
   const downloadGpx = () => {
     saveAs(info.gpxpath, `${courseName}.gpx`);
   };
 
   const searchCourse = (map) => {
-    getGpx()
+    getInfo()
+      .then((info) => axios.get(info.gpxpath).then((gpxFile) => gpxFile.data))
+      .then((gpx) => new XMLParser().parseFromString(gpx))
       .then((xml) => xml.getElementsByTagName('trkseg')[0])
       .then((trkseg) => {
         const trksegData = trkseg.children;
@@ -159,7 +156,6 @@ function Gpx() {
     const map = new kakao.maps.Map(mapContainer, mapOption);
     const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-    getInfo();
     searchCourse(map);
   }, []);
 
