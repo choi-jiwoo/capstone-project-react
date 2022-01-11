@@ -79,7 +79,11 @@ function Gpx() {
       .get(baseUrl, {
         params: params,
       })
-      .then((response) => response.data.response.body.items.item);
+      .then((response) => response.data.response.body.items.item)
+      .catch(() => {
+        alert('Service not available as of now.');
+        window.location.href = 'http://localhost:3000/plogging';
+      });
   };
 
   const getInfo = () => {
