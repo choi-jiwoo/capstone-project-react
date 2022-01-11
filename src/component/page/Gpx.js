@@ -60,7 +60,6 @@ function Gpx() {
     );
     map.setCenter(moveLatLon);
 
-    // 지도 1단계 줌아웃
     // const level = map.getLevel();
     // map.setLevel(level + 1);
   };
@@ -128,22 +127,18 @@ function Gpx() {
           const pos = new kakao.maps.LatLng(lat, lon);
           linePath.push(pos);
         });
-        // 경로 그리기
         drawPath(linePath, map);
 
-        // 출발 마커 표시
         const startPosition = linePath[0];
         const startImgSrc =
           'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png';
         drawFlag(startPosition, map, startImgSrc);
 
-        // 도착 마커 표시
         const arrivePosition = linePath[courseLength - 1];
         const arriveImgSrc =
           'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png';
         drawFlag(arrivePosition, map, arriveImgSrc);
 
-        // 지도 이동
         moveFocus(linePath, map, middle, startPosition, arrivePosition);
       });
   };
@@ -152,7 +147,6 @@ function Gpx() {
     data ? data.map((element) => <p key={element}>{element}</p>) : null;
 
   useEffect(() => {
-    // setting map
     const mapContainer = document.getElementById('map'),
       mapOption = {
         center: baseMap,
