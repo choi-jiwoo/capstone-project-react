@@ -46,22 +46,23 @@ function Gpx() {
     });
   };
 
-  const moveFocus = (linePath, map, middle, startPosition, arrivePosition) => {
-    const points = [startPosition, arrivePosition];
-    const bounds = new kakao.maps.LatLngBounds();
-    points.forEach((element) => {
-      bounds.extend(element);
-    });
-    map.setBounds(bounds, 100, 100);
+  const moveFocus = (map, latList, lonList) => {
+    const maxX = Math.max(...latList);
+    const maxY = Math.max(...lonList);
+    const minX = Math.min(...latList);
+    const minY = Math.min(...lonList);
+    const centerX = minX + (maxX - minX) / 2;
+    const centerY = minY + (maxY - minY) / 2;
 
-    const moveLatLon = new kakao.maps.LatLng(
-      linePath[middle].Ma,
-      linePath[middle].La
-    );
+    const moveLatLon = new kakao.maps.LatLng(centerX, centerY);
+    const level = map.getLevel();
     map.setCenter(moveLatLon);
+    map.setLevel(level - 2);
 
-    // const level = map.getLevel();
-    // map.setLevel(level + 1);
+    const marker = new kakao.maps.Marker({
+      position: moveLatLon,
+    });
+    marker.setMap(map);
   };
 
   const requestDurunubi = () => {
@@ -119,13 +120,16 @@ function Gpx() {
       .then((trkseg) => {
         const trksegData = trkseg.children;
         const courseLength = trksegData.length;
-        const middle = parseInt(courseLength / 2);
         var linePath = [];
+        var latList = [];
+        var lonList = [];
 
         trksegData.forEach((element) => {
           const lat = element.attributes.lat;
           const lon = element.attributes.lon;
           const pos = new kakao.maps.LatLng(lat, lon);
+          latList.push(lat);
+          lonList.push(lon);
           linePath.push(pos);
         });
         drawPath(linePath, map);
@@ -140,7 +144,7 @@ function Gpx() {
           'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png';
         drawFlag(arrivePosition, map, arriveImgSrc);
 
-        moveFocus(linePath, map, middle, startPosition, arrivePosition);
+        moveFocus(map, latList, lonList);
       });
   };
 
