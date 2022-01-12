@@ -19,6 +19,7 @@ const Location = ({ list }) => {
   }, []);
 
   useEffect(() => {
+    removeInfoWindow();
     const infoWindow = new kakao.maps.InfoWindow({
       removable: true,
     });
@@ -54,6 +55,15 @@ const Location = ({ list }) => {
       if (!bounds.isEmpty()) kakaomap.setBounds(bounds);
     }
   }, [list]);
+
+  const removeInfoWindow = () => {
+    const infoWindow = document.getElementsByClassName('infoWindow')[0];
+    if (infoWindow === undefined) console.log('no infowindow');
+    else {
+      const grandParentElement = infoWindow.parentNode.parentNode;
+      grandParentElement.remove();
+    }
+  };
 
   const setInfoWindowContent = (infoWindow, storeInfo) => {
     var content = document.createElement('div');
