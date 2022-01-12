@@ -1,27 +1,24 @@
 /*global kakao*/
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Location = ({ list }) => {
   const { kakao } = window;
   const baseMap = new kakao.maps.LatLng(33.385323, 126.551464);
+  const [kakaomap, setKakaomap] = useState(null);
 
   useEffect(() => {
-    // setting map
     const mapContainer = document.getElementById('map'),
       mapOption = {
         center: baseMap,
         level: 10,
       };
-
-    // 이렇게 하는게 아닐텐데
-    const childCnt = mapContainer.childElementCount;
-    if (childCnt === 3) {
-      while (mapContainer.hasChildNodes())
-        mapContainer.removeChild(mapContainer.firstChild);
-    }
-
     const map = new kakao.maps.Map(mapContainer, mapOption);
+    const zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    setKakaomap(map);
+  }, []);
 
+  useEffect(() => {
     const infoWindow = new kakao.maps.InfoWindow({
       removable: true,
     });
@@ -33,28 +30,28 @@ const Location = ({ list }) => {
 
     for (let i = 0; i < data.length; i++) {
       const marker = new kakao.maps.Marker({
-        map: map,
+        map: kakaomap,
         position: data[i].postition,
       });
 
-      marker.setMap(map);
+      marker.setMap(kakaomap);
       bounds.extend(data[i].postition);
 
       // events
       (function attachInfoWindow(marker, data, i) {
         kakao.maps.event.addListener(marker, 'click', function () {
-          displayInfoWindow(map, marker, infoWindow, data);
+          displayInfoWindow(kakaomap, marker, infoWindow, data);
         });
 
-        kakao.maps.event.addListener(map, 'click', function () {
+        kakao.maps.event.addListener(kakaomap, 'click', function () {
           infoWindow.setMap(null);
         });
         resultList[i].onclick = function () {
-          displayInfoWindow(map, marker, infoWindow, data);
+          displayInfoWindow(kakaomap, marker, infoWindow, data);
         };
       })(marker, data[i], i);
 
-      if (!bounds.isEmpty()) map.setBounds(bounds);
+      if (!bounds.isEmpty()) kakaomap.setBounds(bounds);
     }
   }, [list]);
 
@@ -105,14 +102,14 @@ const Location = ({ list }) => {
     infoWindow.setContent(content);
   };
 
-  const displayInfoWindow = (map, marker, infoWindow, storeInfo) => {
+  const displayInfoWindow = (kakaomap, marker, infoWindow, storeInfo) => {
     const pos = marker.getPosition();
     const moveLatLon = new kakao.maps.LatLng(pos.Ma, pos.La);
-    map.panTo(moveLatLon);
+    kakaomap.panTo(moveLatLon);
 
     infoWindow.setPosition(pos);
     setInfoWindowContent(infoWindow, storeInfo);
-    infoWindow.open(map, marker);
+    infoWindow.open(kakaomap, marker);
   };
 
   const getData = (item) => {
