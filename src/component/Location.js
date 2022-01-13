@@ -116,8 +116,6 @@ const Location = ({ list }) => {
     const pos = marker.getPosition();
     const moveLatLon = new kakao.maps.LatLng(pos.Ma, pos.La);
     kakaomap.panTo(moveLatLon);
-
-    infoWindow.setPosition(pos);
     setInfoWindowContent(infoWindow, storeInfo);
     infoWindow.open(kakaomap, marker);
   };
