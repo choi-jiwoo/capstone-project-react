@@ -5,6 +5,12 @@ const Location = ({ list }) => {
   const { kakao } = window;
   const baseMap = new kakao.maps.LatLng(33.385323, 126.551464);
   const [kakaomap, setKakaomap] = useState(null);
+  const [markerArr, setMarkerArr] = useState([]);
+  const [infoWindow, setInfoWindow] = useState(
+    new kakao.maps.InfoWindow({
+      removable: true,
+    })
+  );
 
   useEffect(() => {
     const mapContainer = document.getElementById('map'),
@@ -19,10 +25,13 @@ const Location = ({ list }) => {
   }, []);
 
   useEffect(() => {
-    removeInfoWindow();
-    const infoWindow = new kakao.maps.InfoWindow({
-      removable: true,
-    });
+    infoWindow.setMap(null);
+    infoWindow.length = 0;
+
+    for (let i = 0; i < markerArr.length; i++) markerArr[i].setMap(null);
+    markerArr.length = 0;
+
+    infoWindow.Jh.style.marginTop = '-3px'; // content박스와 세모박스와 연결이 끊기는걸 이어줌
 
     let bounds = new kakao.maps.LatLngBounds();
 
@@ -34,7 +43,7 @@ const Location = ({ list }) => {
         map: kakaomap,
         position: data[i].postition,
       });
-
+      markerArr.push(marker);
       marker.setMap(kakaomap);
       bounds.extend(data[i].postition);
 
@@ -55,15 +64,6 @@ const Location = ({ list }) => {
       if (!bounds.isEmpty()) kakaomap.setBounds(bounds);
     }
   }, [list]);
-
-  const removeInfoWindow = () => {
-    const infoWindow = document.getElementsByClassName('infoWindow')[0];
-    if (infoWindow === undefined) console.log('no infowindow');
-    else {
-      const grandParentElement = infoWindow.parentNode.parentNode;
-      grandParentElement.remove();
-    }
-  };
 
   const setInfoWindowContent = (infoWindow, storeInfo) => {
     var content = document.createElement('div');
