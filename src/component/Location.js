@@ -16,7 +16,7 @@ const Location = ({ list }) => {
     const mapContainer = document.getElementById('map'),
       mapOption = {
         center: baseMap,
-        level: 10,
+        level: 9,
       };
     const map = new kakao.maps.Map(mapContainer, mapOption);
     const zoomControl = new kakao.maps.ZoomControl();
