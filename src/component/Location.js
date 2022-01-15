@@ -66,6 +66,7 @@ const Location = ({ list }) => {
   }, [list]);
 
   const setInfoWindowContent = (infoWindow, storeInfo) => {
+    let infoText = '';
     var content = document.createElement('div');
     content.className = 'infoWindow';
     var info = document.createElement('div');
@@ -78,7 +79,8 @@ const Location = ({ list }) => {
 
     var title = document.createElement('div');
     title.className = 'font-bold text-lg';
-    title.appendChild(document.createTextNode(storeInfo.store));
+    infoText = checkContentExist(storeInfo.store);
+    title.appendChild(document.createTextNode(infoText));
     header.appendChild(title);
 
     var desc = document.createElement('div');
@@ -88,13 +90,15 @@ const Location = ({ list }) => {
     var addr = document.createElement('p');
     addr.appendChild(document.createTextNode('위치'));
     addr.appendChild(document.createElement('br'));
-    addr.appendChild(document.createTextNode(storeInfo.addr));
+    infoText = checkContentExist(storeInfo.addr);
+    addr.appendChild(document.createTextNode(infoText));
     desc.appendChild(addr);
 
     var tel = document.createElement('p');
     tel.appendChild(document.createTextNode('번호'));
     tel.appendChild(document.createElement('br'));
-    tel.appendChild(document.createTextNode(storeInfo.tel));
+    infoText = checkContentExist(storeInfo.tel);
+    tel.appendChild(document.createTextNode(infoText));
     desc.appendChild(tel);
 
     var homepage = document.createElement('p');
@@ -106,7 +110,8 @@ const Location = ({ list }) => {
     homepageLink.className = 'hover:text-green-400';
     homepageLink.setAttribute('href', storeInfo.homepage);
     homepageLink.setAttribute('target', '_blank');
-    homepageLink.appendChild(document.createTextNode(storeInfo.homepage));
+    infoText = checkContentExist(storeInfo.homepage);
+    homepageLink.appendChild(document.createTextNode(infoText));
     homepage.appendChild(homepageLink);
 
     infoWindow.setContent(content);
