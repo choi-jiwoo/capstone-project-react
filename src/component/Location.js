@@ -31,8 +31,6 @@ const Location = ({ list }) => {
     for (let i = 0; i < markerArr.length; i++) markerArr[i].setMap(null);
     markerArr.length = 0;
 
-    infoWindow.Jh.style.marginTop = '-3px'; // content박스와 세모박스와 연결이 끊기는걸 이어줌
-
     let bounds = new kakao.maps.LatLngBounds();
 
     const data = list.map((item) => getData(item));
@@ -122,6 +120,7 @@ const Location = ({ list }) => {
     const pos = marker.getPosition();
     const moveLatLon = new kakao.maps.LatLng(pos.Ma, pos.La);
     kakaomap.panTo(moveLatLon);
+    content.parentNode.previousSibling.style.marginTop = '-3px'; // content박스와 세모박스와 연결이 끊기는걸 이어줌
     infoWindow.open(kakaomap, marker);
   };
 
