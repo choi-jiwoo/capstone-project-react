@@ -125,10 +125,9 @@ const Location = ({ list }) => {
   const displayInfoWindow = (kakaomap, marker, infoWindow, storeInfo) => {
     const content = setInfoWindowContent(infoWindow, storeInfo);
     const pos = marker.getPosition();
-    const moveLatLon = new kakao.maps.LatLng(pos.Ma, pos.La);
-    kakaomap.panTo(moveLatLon);
     content.parentNode.previousSibling.style.marginTop = '-3px'; // content박스와 세모박스와 연결이 끊기는걸 이어줌
     infoWindow.open(kakaomap, marker);
+    kakaomap.panTo(pos);
   };
 
   const getData = (item) => {
