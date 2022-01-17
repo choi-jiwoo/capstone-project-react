@@ -52,7 +52,7 @@ const Location = ({ list }) => {
         });
 
         kakao.maps.event.addListener(kakaomap, 'click', function () {
-          infoWindow.setMap(null);
+          infoWindow.close();
         });
         resultList[i].onclick = function () {
           displayInfoWindow(kakaomap, marker, infoWindow, data);
