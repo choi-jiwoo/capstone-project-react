@@ -113,6 +113,9 @@ const Location = ({ list }) => {
     homepage.appendChild(homepageLink);
 
     infoWindow.setContent(content);
+  const checkContentExist = (content) => {
+    if (content !== null) return content;
+    else return '';
   };
 
   const displayInfoWindow = (kakaomap, marker, infoWindow, storeInfo) => {
