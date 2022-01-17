@@ -113,13 +113,17 @@ const Location = ({ list }) => {
     homepage.appendChild(homepageLink);
 
     infoWindow.setContent(content);
+
+    return content;
+  };
+
   const checkContentExist = (content) => {
     if (content !== null) return content;
     else return '';
   };
 
   const displayInfoWindow = (kakaomap, marker, infoWindow, storeInfo) => {
-    setInfoWindowContent(infoWindow, storeInfo);
+    const content = setInfoWindowContent(infoWindow, storeInfo);
     const pos = marker.getPosition();
     const moveLatLon = new kakao.maps.LatLng(pos.Ma, pos.La);
     kakaomap.panTo(moveLatLon);
