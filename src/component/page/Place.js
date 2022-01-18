@@ -9,10 +9,10 @@ import StoreList from '../StoreList';
 function Place() {
   const location = useLocation();
   const type = location.state.type;
+  const baseUrl = 'http://127.0.0.1:8000/api/';
   const [data, setData] = useState([]);
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [params, setParams] = useState(new URLSearchParams());
-  const baseUrl = 'http://127.0.0.1:8000/api/';
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
