@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import XMLParser from 'react-xml-parser';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { saveAs } from 'file-saver';
-import { Link } from 'react-router-dom';
 
 function Gpx() {
   const location = useLocation();
