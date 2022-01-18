@@ -1,5 +1,5 @@
 import React from 'react';
-import Service from '../Service';
+import MainService from '../MainService';
 import HomeContent from '../HomeContent';
 import { Link } from 'react-router-dom';
 import banner from '../../asset/main_banner.jpg';
@@ -27,7 +27,7 @@ function Home() {
           </Link>
         </button>
       </div>
-      <Service />
+      <MainService />
       <HomeContent />
     </>
   );

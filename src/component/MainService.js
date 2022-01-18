@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Service() {
+function MainService() {
   return (
     <>
       <div className='mt-80 pt-4 text-center text-2xl font-extrabold'>
@@ -51,4 +51,4 @@ function Service() {
   );
 }
 
-export default Service;
+export default MainService;
