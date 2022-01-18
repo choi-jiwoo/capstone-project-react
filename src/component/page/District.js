@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import Page from '../Page';
 import StayList from '../StayList';
 
@@ -9,11 +8,9 @@ function District() {
   const location = useLocation();
   const district = location.state.district;
   const subDistrict = district.split(' ')[1];
-
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [count, setCount] = useState(0);
-  // const baseUrl = 'http://quantum-backup-334216.du.r.appspot.com/api/';
   const baseUrl = 'http://127.0.0.1:8000/api/';
 
   useEffect(() => {
