@@ -131,6 +131,10 @@ const Location = ({ list }) => {
   };
 
   const getData = (item) => {
+    for (const [key, value] of Object.entries(item)) {
+      item[key] = checkContentExist(value);
+    }
+
     const individual = {
       thumbnail: item.thum_url,
       store: item.store,
