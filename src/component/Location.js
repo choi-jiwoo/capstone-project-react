@@ -64,57 +64,25 @@ const Location = ({ list }) => {
   }, [list]);
 
   const setInfoWindowContent = (infoWindow, storeInfo) => {
-    let infoText = '';
-    var content = document.createElement('div');
-    content.className = 'infoWindow';
-    var info = document.createElement('div');
-    info.className = 'info flex flex-col break-all';
-    content.appendChild(info);
-
-    var header = document.createElement('div');
-    header.className = 'flex flex-row justify-between border-b h-10';
-    info.appendChild(header);
-
-    var title = document.createElement('div');
-    title.className = 'font-bold text-lg';
-    infoText = checkContentExist(storeInfo.store);
-    title.appendChild(document.createTextNode(infoText));
-    header.appendChild(title);
-
-    var desc = document.createElement('div');
-    desc.className = 'flex flex-col whitespace-normal';
-    info.appendChild(desc);
-
-    var addr = document.createElement('p');
-    addr.appendChild(document.createTextNode('위치'));
-    addr.appendChild(document.createElement('br'));
-    infoText = checkContentExist(storeInfo.addr);
-    addr.appendChild(document.createTextNode(infoText));
-    desc.appendChild(addr);
-
-    var tel = document.createElement('p');
-    tel.appendChild(document.createTextNode('번호'));
-    tel.appendChild(document.createElement('br'));
-    infoText = checkContentExist(storeInfo.tel);
-    tel.appendChild(document.createTextNode(infoText));
-    desc.appendChild(tel);
-
-    var homepage = document.createElement('p');
-    homepage.appendChild(document.createTextNode('홈페이지'));
-    homepage.appendChild(document.createElement('br'));
-    desc.appendChild(homepage);
-
-    var homepageLink = document.createElement('a');
-    homepageLink.className = 'hover:text-green-400';
-    homepageLink.setAttribute('href', storeInfo.homepage);
-    homepageLink.setAttribute('target', '_blank');
-    infoText = checkContentExist(storeInfo.homepage);
-    homepageLink.appendChild(document.createTextNode(infoText));
-    homepage.appendChild(homepageLink);
-
-    infoWindow.setContent(content);
-
-    return content;
+    const infoWindowElement = `<div class="infoWindow">
+                              <div class="info flex flex-col break-all">
+                                  <div class="flex flex-row justify-between border-b h-10">
+                                  <div class="font-bold text-lg">${storeInfo.store}</div>
+                                  </div>
+                                  <div class="flex flex-col whitespace-normal">
+                                  <p>위치<br />${storeInfo.addr}</p>
+                                  <p>번호<br />${storeInfo.tel}</p>
+                                  <p>
+                                      홈페이지<br /><a
+                                      class="hover:text-green-400"
+                                      href="${storeInfo.homepage}"
+                                      target="_blank"
+                                      >${storeInfo.homepage}</a>
+                                  </p>
+                                  </div>
+                              </div>
+                              </div>`;
+    infoWindow.setContent(infoWindowElement);
   };
 
   const checkContentExist = (content) => {
@@ -123,10 +91,13 @@ const Location = ({ list }) => {
   };
 
   const displayInfoWindow = (kakaomap, marker, infoWindow, storeInfo) => {
-    const content = setInfoWindowContent(infoWindow, storeInfo);
-    const pos = marker.getPosition();
-    content.parentNode.previousSibling.style.marginTop = '-3px'; // content박스와 세모박스와 연결이 끊기는걸 이어줌
+    setInfoWindowContent(infoWindow, storeInfo);
     infoWindow.open(kakaomap, marker);
+
+    const infoWindowElement = document.getElementsByClassName('infoWindow')[0];
+    infoWindowElement.parentNode.previousSibling.style.marginTop = '-3px'; // content박스와 세모박스와 연결이 끊기는걸 이어줌
+
+    const pos = marker.getPosition();
     kakaomap.panTo(pos);
   };
 
