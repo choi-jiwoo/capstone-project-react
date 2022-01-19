@@ -13,6 +13,11 @@ function District() {
   const [count, setCount] = useState(0);
   const baseUrl = 'http://127.0.0.1:8000/api/';
 
+  const movePage = (page) => {
+    setPage(page);
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     axios
       .get(baseUrl + 'stay?district=' + subDistrict + '&page=' + page)
@@ -33,7 +38,7 @@ function District() {
         <span className='text-green-500'>{district}</span>에 대한 검색결과
       </div>
       <StayList data={data} />
-      <Page page={page} count={count} setPage={setPage} />
+      <Page page={page} count={count} setPage={movePage} />
     </div>
   );
 }
