@@ -54,11 +54,7 @@ function Place() {
       });
   };
 
-  useEffect(() => {
-    setLoading(false);
-  }, [data]);
-
-  useEffect(() => {
+  const setPageType = () => {
     let pageType;
     switch (type) {
       case 'cafe':
@@ -70,10 +66,25 @@ function Place() {
       default:
         console.log('Store type error.');
     }
-    axios.get(url).then(function (response) {
-      setStoreKwrd(response.data);
-    });
+    return pageType;
+  };
+
+  useEffect(() => {
+    setLoading(false);
+  }, [data]);
+
+  useEffect(() => {
+    const pageType = setPageType();
     const url = baseUrl + pageType + '/keyword';
+
+    axios
+      .get(url)
+      .then((response) => {
+        setStoreKwrd(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
