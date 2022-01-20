@@ -24,6 +24,9 @@ function District() {
       .then((response) => {
         setCount(response.data.count);
         setData(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, [page]);
 
