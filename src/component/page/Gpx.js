@@ -43,23 +43,12 @@ function Gpx() {
     });
   };
 
-  const moveFocus = (map, latList, lonList) => {
-    const maxX = Math.max(...latList);
-    const maxY = Math.max(...lonList);
-    const minX = Math.min(...latList);
-    const minY = Math.min(...lonList);
-    const centerX = minX + (maxX - minX) / 2;
-    const centerY = minY + (maxY - minY) / 2;
-
-    const moveLatLon = new kakao.maps.LatLng(centerX, centerY);
-    const level = map.getLevel();
-    map.setCenter(moveLatLon);
-    map.setLevel(level - 2);
-
-    const marker = new kakao.maps.Marker({
-      position: moveLatLon,
-    });
-    marker.setMap(map);
+  const moveFocus = (map, linePath) => {
+    const bounds = new kakao.maps.LatLngBounds();
+    for (let i = 0; i < linePath.length; i++) {
+      bounds.extend(linePath[i]);
+    }
+    map.setBounds(bounds);
   };
 
   const requestDurunubi = () => {
