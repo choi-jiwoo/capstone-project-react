@@ -94,6 +94,7 @@ function Gpx() {
           summary: info.crsSummary.split('<br>'),
           contents: info.crsContents.split('<br>'),
           travelInfo: info.travelerinfo.split('<br>'),
+          gpxPath: info.gpxpath,
         };
         setCourseInfo(data);
         return info;
