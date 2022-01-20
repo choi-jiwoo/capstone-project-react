@@ -112,39 +112,41 @@ function Gpx() {
   };
 
   const searchCourse = (map) => {
-    getInfo()
-      .then((info) => axios.get(info.gpxpath).then((gpxFile) => gpxFile.data))
-      .then((gpx) => new XMLParser().parseFromString(gpx))
-      .then((xml) => xml.getElementsByTagName('trkseg')[0])
-      .then((trkseg) => {
-        const trksegData = trkseg.children;
-        const courseLength = trksegData.length;
-        var linePath = [];
-        var latList = [];
-        var lonList = [];
+    getInfo().then((info) =>
+      axios
+        .get(info.gpxPath)
+        .then((gpxFile) => gpxFile.data)
+        .then((gpx) => new XMLParser().parseFromString(gpx))
+        .then((xml) => xml.getElementsByTagName('trkseg')[0])
+        .then((trkseg) => {
+          const trksegData = trkseg.children;
+          const courseLength = trksegData.length;
+          var linePath = [];
 
-        trksegData.forEach((element) => {
-          const lat = element.attributes.lat;
-          const lon = element.attributes.lon;
-          const pos = new kakao.maps.LatLng(lat, lon);
-          latList.push(lat);
-          lonList.push(lon);
-          linePath.push(pos);
-        });
-        drawPath(linePath, map);
+          trksegData.forEach((element) => {
+            const lat = element.attributes.lat;
+            const lon = element.attributes.lon;
+            const pos = new kakao.maps.LatLng(lat, lon);
+            linePath.push(pos);
+          });
+          drawPath(linePath, map);
 
-        const startPosition = linePath[0];
-        const startImgSrc =
-          'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png';
-        drawFlag(startPosition, map, startImgSrc);
+          const startPosition = linePath[0];
+          const startImgSrc =
+            'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png';
+          drawFlag(startPosition, map, startImgSrc);
 
-        const arrivePosition = linePath[courseLength - 1];
-        const arriveImgSrc =
-          'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png';
-        drawFlag(arrivePosition, map, arriveImgSrc);
+          const arrivePosition = linePath[courseLength - 1];
+          const arriveImgSrc =
+            'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png';
+          drawFlag(arrivePosition, map, arriveImgSrc);
 
-        moveFocus(map, latList, lonList);
-      });
+          moveFocus(map, linePath);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    );
   };
 
   const text = (data) =>
