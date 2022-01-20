@@ -97,7 +97,7 @@ function Gpx() {
           gpxPath: info.gpxpath,
         };
         setCourseInfo(data);
-        return info;
+        return data;
       })
       .catch(() => {
         alert('Service not available as of now.');
