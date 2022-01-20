@@ -99,9 +99,8 @@ function Gpx() {
         setCourseInfo(data);
         return data;
       })
-      .catch(() => {
-        alert('Service not available as of now.');
-        window.location.href = 'http://localhost:3000/plogging';
+      .catch((error) => {
+        console.log(error);
       });
   };
 
