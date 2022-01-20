@@ -21,7 +21,7 @@ function District() {
   useEffect(() => {
     axios
       .get(baseUrl + 'stay?district=' + subDistrict + '&page=' + page)
-      .then(function (response) {
+      .then((response) => {
         setCount(response.data.count);
         setData(response.data.results);
       });
