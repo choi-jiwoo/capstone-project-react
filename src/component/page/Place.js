@@ -59,21 +59,21 @@ function Place() {
   }, [data]);
 
   useEffect(() => {
-    let page_type;
+    let pageType;
     switch (type) {
       case 'cafe':
-        page_type = 'cafe';
+        pageType = 'cafe';
         break;
       case 'res':
-        page_type = 'restaurant';
+        pageType = 'restaurant';
         break;
       default:
         console.log('Store type error.');
     }
-    const url = baseUrl + page_type + '/keyword';
     axios.get(url).then(function (response) {
       setStoreKwrd(response.data);
     });
+    const url = baseUrl + pageType + '/keyword';
   }, []);
 
   return (
