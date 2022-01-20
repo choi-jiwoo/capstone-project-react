@@ -18,12 +18,16 @@ function Place() {
   const [hasMore, setHasMore] = useState(true);
   const [storeKwrd, setStoreKwrd] = useState([]);
 
-  const getParameters = (checkedItems, firstPage) => {
+  const removeResults = () => {
     data.length = 0;
     params.delete('page');
     params.delete('tag');
     setLoading(true);
     setHasMore(true);
+  };
+
+  const getParameters = (checkedItems, firstPage) => {
+    removeResults();
     checkedItems.forEach((item) => {
       params.append('tag', item);
     });
