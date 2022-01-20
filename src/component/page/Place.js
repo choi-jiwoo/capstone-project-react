@@ -39,13 +39,13 @@ function Place() {
     const url = baseUrl + type + '?' + params;
     axios
       .get(url)
-      .then(function (response) {
+      .then((response) => {
         const res = response.data;
         const list = res.results;
         if (res.next === null || list.length < 10) setHasMore(false);
         setData([...data, ...list]);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
