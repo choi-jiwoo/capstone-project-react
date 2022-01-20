@@ -88,8 +88,8 @@ function Gpx() {
     return requestDurunubi()
       .then((info) => {
         const data = {
-          name: info.crsKorNm.split('<br>'),
-          type: info.crsCycle.split('<br>'),
+          name: info.crsKorNm,
+          type: info.crsCycle,
           tour: info.crsTourInfo.split('<br>'),
           summary: info.crsSummary.split('<br>'),
           contents: info.crsContents.split('<br>'),
