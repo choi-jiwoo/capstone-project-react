@@ -25,7 +25,7 @@ function MainService() {
           to={{
             pathname: '/restaurant',
             state: {
-              type: 'res',
+              type: 'restaurant',
             },
           }}
         >
