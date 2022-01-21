@@ -10,12 +10,20 @@ const StoreList = ({ data, page, setPage, hasMore, params, getRequest }) => {
     }
   };
 
+  const getHeight = () => {
+    const viewportHeight =
+      document.getElementsByClassName('search')[0].offsetHeight;
+    const formElementHeight =
+      document.getElementsByTagName('form')[0].offsetHeight;
+    return viewportHeight - formElementHeight - 56;
+  };
+
   return (
     <InfiniteScroll
       dataLength={data.length}
       next={fetchData}
       hasMore={hasMore}
-      height={512}
+      height={getHeight()}
       endMessage={
         <p className='text-xs text-gray-300 text-center pb-2'>
           더이상 로드할 수 없습니다.
