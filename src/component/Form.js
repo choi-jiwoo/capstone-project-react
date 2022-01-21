@@ -23,7 +23,7 @@ function Form({ getParameters, selectList, checkedItems, setCheckedItems }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col mt-3'>
+    <form onSubmit={handleSubmit} className='flex flex-col mt-12'>
       <div className='flex flex-wrap gap-2 justify-center'>
         {selectList.map((item) => (
           <label
