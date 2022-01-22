@@ -18,6 +18,7 @@ function Place() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [storeKwrd, setStoreKwrd] = useState([]);
+  const [height, setHeight] = useState(null);
 
   const removeResults = () => {
     data.length = 0;
@@ -55,6 +56,13 @@ function Place() {
       });
   };
 
+  const setPlacePageHeight = () => {
+    const windowHeight = window.innerHeight;
+    const navBarHeight = document.getElementsByTagName('nav')[0].offsetHeight;
+    const footerHeight =
+      document.getElementsByTagName('footer')[0].offsetHeight;
+    const height = windowHeight - navBarHeight - footerHeight;
+    setHeight(height);
   };
 
   useEffect(() => {
@@ -62,6 +70,7 @@ function Place() {
   }, [data]);
 
   useEffect(() => {
+    setPlacePageHeight();
     const url = baseUrl + type + '/keyword';
 
     axios
@@ -76,7 +85,7 @@ function Place() {
   }, []);
 
   return (
-    <div className='search container-xl mt-8'>
+    <div className='search container-xl' style={{ height: height }}>
       <div className='flex h-full'>
         <div className='form flex flex-col pr-5'>
           <Form
@@ -98,7 +107,7 @@ function Place() {
             />
           ) : null}
         </div>
-        <Location list={data} />
+        {height ? <Location list={data} /> : null}
       </div>
     </div>
   );
