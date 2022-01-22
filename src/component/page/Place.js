@@ -54,19 +54,6 @@ function Place() {
       });
   };
 
-  const setPageType = () => {
-    let pageType;
-    switch (type) {
-      case 'cafe':
-        pageType = 'cafe';
-        break;
-      case 'res':
-        pageType = 'restaurant';
-        break;
-      default:
-        console.log('Store type error.');
-    }
-    return pageType;
   };
 
   useEffect(() => {
@@ -74,8 +61,7 @@ function Place() {
   }, [data]);
 
   useEffect(() => {
-    const pageType = setPageType();
-    const url = baseUrl + pageType + '/keyword';
+    const url = baseUrl + type + '/keyword';
 
     axios
       .get(url)
