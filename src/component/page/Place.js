@@ -34,7 +34,7 @@ function Place() {
     });
     getRequest(params, firstPage);
     setPage(2);
-    console.log(params.toString()); 
+    console.log(params.toString());
   };
 
   const getRequest = (params, page) => {
@@ -77,7 +77,7 @@ function Place() {
 
   return (
     <div className='search container-xl mt-8'>
-      <div className='flex h-full relative'>
+      <div className='flex h-full'>
         <div className='form flex flex-col pr-5'>
           <Form
             getParameters={getParameters}
@@ -85,9 +85,7 @@ function Place() {
             checkedItems={checkedItems}
             setCheckedItems={setCheckedItems}
           />
-          <div className='mb-2'>
-            <hr />
-          </div>
+          <hr />
           <Loading loading={loading} />
           {hasKeyword ? (
             <StoreList
