@@ -14,6 +14,7 @@ function Place() {
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [params, setParams] = useState(new URLSearchParams());
   const [loading, setLoading] = useState(false);
+  const [hasKeyword, setHasKeyword] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [storeKwrd, setStoreKwrd] = useState([]);
@@ -67,6 +68,7 @@ function Place() {
       .get(url)
       .then((response) => {
         setStoreKwrd(response.data);
+        setHasKeyword(true);
       })
       .catch((error) => {
         console.log(error);
@@ -87,14 +89,16 @@ function Place() {
             <hr />
           </div>
           <Loading loading={loading} />
-          <StoreList
-            data={data}
-            page={page}
-            setPage={setPage}
-            hasMore={hasMore}
-            params={params}
-            getRequest={getRequest}
-          />
+          {hasKeyword ? (
+            <StoreList
+              data={data}
+              page={page}
+              setPage={setPage}
+              hasMore={hasMore}
+              params={params}
+              getRequest={getRequest}
+            />
+          ) : null}
         </div>
         <Location list={data} />
       </div>
