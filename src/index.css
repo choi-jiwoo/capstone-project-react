@@ -99,3 +99,10 @@ ul.pagination li a.active {
 .form {
   width: 648px;
 }
+
+.mainContent {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  padding-top: 5rem;
+}
+
