@@ -114,3 +114,9 @@ ul.pagination li a.active {
   width: 100%;
 }
 
+.mainContentItemList {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  flex-direction: row;
+}
