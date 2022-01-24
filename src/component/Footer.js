@@ -5,7 +5,7 @@ function Footer() {
   const courseUrl = 'https://biz.ajou.ac.kr/ebiz/index.jsp';
 
   return (
-    <footer className='container-xl static bottom-0 bg-white text-center py-14'>
+    <footer className='container-xl static bottom-0 bg-white text-center py-20'>
       <div className='grid grid-cols-3 text-gray-400 text-sm'>
         <div className='pr-12'>
           <img src={footer1} alt='footer_logo' />
