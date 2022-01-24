@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 function MainService() {
   return (
     <>
-      <div className='mt-80 pt-4 text-center text-2xl font-extrabold'>
+      <div className='mt-96 pt-4 text-center text-4xl font-extrabold'>
         공정여행 참여하기🌿
       </div>
-      <div className='flex flex-wrap flex-row justify-center items-center gap-6 pt-3 pb-7'>
+      <div className='flex flex-wrap flex-row justify-center items-center gap-9 pt-16'>
         <Link
           className='grid border-solid border-2 border-transparent shadow-sm rounded-lg py-2 px-3'
           to={{
