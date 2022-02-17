@@ -32,7 +32,7 @@ const StoreList = ({ data, page, setPage, hasMore, params, getRequest }) => {
     >
       <div
         className='grid grid-cols-1 content-center divide-y'
-        style={{ width: '384px' }}
+        style={{ width: '394px' }}
       >
         {data.map((item) => (
           <Store key={item.id} item={item} />
